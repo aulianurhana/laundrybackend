@@ -6,7 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use JWTAuth;
+use Namshi\JOSE\JWT;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
@@ -23,11 +24,20 @@ class AuthController extends Controller
             return response()->json(['message' => 'Generate Token Failed']);
 		}
 
-        $data = [
-			'token' => $token,
-			'user'  => JWTAuth::user()
-		];
-        return response()->json(['message' => 'Authentication success', 'data' => $data]);
+		$user = JWTAuth::user();
+
+		return response()->json([
+			'success' => true,
+			'message' => 'Login berhasil',
+			'token'   => $token,
+			'user'    => $user
+		]);
+
+        // $data = [
+		// 	'token' => $token,
+		// 	'user'  => JWTAuth::user()
+		// ];
+        // return response()->json(['message' => 'Authentication success', 'data' => $data]);
 	}
 
     public function loginCheck()
