@@ -70,7 +70,12 @@ Route::group(['middleware' => ['jwt.verify:admin,kasir']], function () {
      Route::put('updatemember/{id}', [MemberController::class, 'update']);
      Route::delete('deletemember/{id}', [MemberController::class, 'delete']);
  
- 
+ // paket
+    Route::post('tambahpaket', [PaketController::class, 'store']);
+    Route::get('tampilpaket', [PaketController::class, 'getAll']);
+    Route::get('tampilpaket/{id}', [PaketController::class, 'getdata']);
+    Route::put('updatepaket/{id}', [PaketController::class, 'update']);
+    Route::delete('deletepaket/{id}', [PaketController::class, 'delete']);
  
      // Transaksi dan Detail transaksi
      Route::post('tambahtransaksi', [TransaksiController::class, 'store']);
